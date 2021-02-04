@@ -14,13 +14,21 @@ public class Main {
             byte userChoise = input.nextByte();
             switch (userChoise) {
                 case 1:
-
+                    showAvailableProducts();
                     break;
                 case 2:
                     exitProgram();
                     break;
+                default:
+                    do {
+                        System.out.println("Грешен избор, моля изберете пак:");
+                         userChoise = input.nextByte();
+                    } while (userChoise < 2 || userChoise > 1);
             }
         }
+
+    }
+    public static void showAvailableProducts(){
 
     }
     public static void exitProgram(){
