@@ -1,5 +1,6 @@
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,6 +30,14 @@ public class Main {
 
     }
     public static void showAvailableProducts(){
+        ArrayList <String> availableProducts = new ArrayList<String>();
+            availableProducts.add("\n, Кока Кола \n");
+            availableProducts.add("Пиринско Младо Пиво \n");
+            availableProducts.add("Водка Савой - Ако немаш пари \n");
+            availableProducts.add("Закуски- (Пици, Банички, Саламки) - Дигант \n");
+            availableProducts.add("Чипсове, Хрупанки - Зайо Байо \n");
+
+        System.out.println(availableProducts);
 
     }
     public static void exitProgram(){
