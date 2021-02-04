@@ -23,7 +23,7 @@ public class Main {
                     do {
                         System.out.println("Грешен избор, моля изберете пак:");
                          userChoise = input.nextByte();
-                    } while (userChoise < 2 || userChoise > 1);
+                    } while (userChoise > 2 || userChoise < 1);
             }
         }
 
