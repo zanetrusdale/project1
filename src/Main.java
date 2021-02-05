@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -48,7 +47,7 @@ public class Main {
         String expireDates [] = {"20 days", "3 days", "50 days"};
 
 
-       for (int i = 0; i < availableProducts.length; i++){
+       for (int i = 0; i < availableProducts.length; i++){                 //Знам, че ги събрах малко кофти
             System.out.print(availableProducts[i] + " - " + availableNumber[i] + "бр" + " - " + dateProductArrived[i] + " - " + expireDates[i] + "\n");
         }
 
@@ -68,12 +67,29 @@ public class Main {
 
     }
     public static void showThePlacementOfTheProducts (){
-        ArrayList <String> placeOfTheProducts = new ArrayList<String>();
-        placeOfTheProducts.add("1st raft\n");
-        placeOfTheProducts.add("1st raft\n");
-        placeOfTheProducts.add("1st raft\n");
-        placeOfTheProducts.add("2nd raft\n");
-        placeOfTheProducts.add("2nd raft\n");
+        Scanner input = new Scanner(System.in);
+
+        ArrayList <String> shelfUpTen = new ArrayList<String>();
+        ArrayList <String> shelfFromTenToTwenty = new ArrayList<String>();
+
+        System.out.println("Моля изберете продукт:");                       //TODO: Finish the shelfs
+            String newOrder = input.nextLine();
+        System.out.println("Моля изберете брой:");
+            int productNumberOfTheOrder = input.nextInt();
+
+        if (productNumberOfTheOrder < 1){
+            System.out.println("Недостатъчно количество за поръчка");
+        }   else if(productNumberOfTheOrder >= 1 && productNumberOfTheOrder <= 10){
+            shelfUpTen.add(newOrder);
+            System.out.println(shelfUpTen);
+        } else if (productNumberOfTheOrder > 10 && productNumberOfTheOrder <= 20){
+            shelfFromTenToTwenty.add(newOrder);
+            System.out.println(shelfFromTenToTwenty);
+        } else {
+            System.out.println("Wrong information with the order");
+        };
+    public static void makeMenuForProductOrder
+
     }
     public static void exitProgram(){           // Last choise - the method to exit the program ;)
         System.exit(0);
