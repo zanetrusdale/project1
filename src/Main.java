@@ -10,7 +10,7 @@ public class Main {
                 System.out.println("Избери една опция:");
             System.out.println("---------------------------\n"+
                     "   1. Продукти, които предлагаме \n" +       //Products that we provide and their descriptions: - (you can add order based on  this products)
-                    "   2. Налични продукти \n" +                //Products that we have at the moment:
+                    "   2. Продукти и наличност \n" +                //Products that we have at the moment:
                     "   3. Разпределение на склада \n" +        //Where the product is placed
                     "   4. Изход \n" +
                     "----------------------------" );
@@ -20,10 +20,10 @@ public class Main {
                     showTheProductsWeProvide();
                     break;
                 case 2:
-                    showAvailableProducts();
+                    developAvailability();
                     break;
                 case 3:
-                    showThePlacementOfTheProducts(); // Place of the products:
+                    developStorage();
                     break;
                 case 4:
                     exitProgram();
@@ -35,28 +35,11 @@ public class Main {
                     } while (userChoise > 4 || userChoise < 1);
             }
         }
-
     }
 
-    public static void showAvailableProducts(){                             //Method for User's choise "2"
-
-        String availableProducts [] = {"Кока Кола","Закуски","Водка"};
-
-        int availableNumber [] = {50, 20, 15};
-
-        double dateProductArrived [] = {5.02, 13.02, 1.02};
-
-        String expireDates [] = {"20 days", "3 days", "50 days"};
-
-
-       for (int i = 0; i < availableProducts.length; i++){                 //Знам, че ги събрах малко кофти
-            System.out.print(availableProducts[i] + " - " + availableNumber[i] + "бр" + " - " + dateProductArrived[i] + " - " + expireDates[i] + "\n");
-        }
-
-
-    }
 
     public static void showTheProductsWeProvide(){             //Method for the User's 1st choise
+
         ArrayList <String> productsWeProvide = new ArrayList<String>();
         productsWeProvide.add("\n, Кока Кола - Захар като за диабет - 500ml\n");
         productsWeProvide.add("Пиринско - Младо Пиво - Млада Бира за Млади Хора - 2l\n");
@@ -65,34 +48,51 @@ public class Main {
         productsWeProvide.add("Чипсове, Хрупанки - Зайо Байо - Пълни са с.... - 300g\n");
 
         System.out.println(productsWeProvide);
-
-                    //До тук добре
     }
-    public static void showThePlacementOfTheProducts (){
+
+
+    public static void developAvailability(){           //2nd choise
         Scanner input = new Scanner(System.in);
 
-        ArrayList <String> shelfUpTen = new ArrayList<String>();
-        ArrayList <String> shelfFromTenToTwenty = new ArrayList<String>();
-
-        System.out.println("Моля изберете продукт:");
-            String newOrder = input.nextLine();
-        System.out.println("Моля изберете брой:");
-            int productNumberOfTheOrder = input.nextInt();
-
-        if (productNumberOfTheOrder < 1){
-            System.out.println("Недостатъчно количество за поръчка");
-        }   else if(productNumberOfTheOrder >= 1 && productNumberOfTheOrder <= 10){
-            shelfUpTen.add(newOrder);
-            System.out.println(shelfUpTen);
-        } else if (productNumberOfTheOrder > 10 && productNumberOfTheOrder <= 20){
-            shelfFromTenToTwenty.add(newOrder);
-            System.out.println(shelfFromTenToTwenty);
-        } else {
-            System.out.println("Wrong information with the order");
-        };
+       while (true) {
+           System.out.println("Избери опция");
+           System.out.println("---------------------------\n"+
+                   "   1. Менажиране на склада \n" +
+                   "   2. Менажиране на продукти \n" +
+                   "   3. Изход \n" +
+                   "----------------------------" );
+           byte userChoise = input.nextByte();
+           switch (userChoise){
+               case 1:
+                   developStorage();
+                   break;
+               case 2:
+                   developProducts();
+               case 3:  //exit the program
+                   break;
+           }
+       }
     }
 
-    public static void makeMenuForProductOrders(){                          //making a menu for orders and use everything with "MO" in it!!
+
+    public static void developStorage(){
+        showAvailableProducts();
+    }
+
+    public static void showAvailableProducts(){                             //Method for User's choise "2"
+
+        String availableProducts [] = {"Кока Кола","Закуски","Водка"};
+        int availableNumber [] = {50, 20, 15};
+        double dateProductArrived [] = {5.02, 13.02, 1.02};
+        String expireDates [] = {"20 days", "3 days", "50 days"};
+
+        for (int i = 0; i < availableProducts.length; i++){                 //Знам, че ги събрах малко кофти
+            System.out.print(availableProducts[i] + " - " + availableNumber[i] + "бр" + " - " + dateProductArrived[i] + " - " + expireDates[i] + "\n");
+        }
+    }
+
+
+    public static void developProducts(){                          //Develop Products
         Scanner input = new Scanner(System.in);
 
         while (true){
@@ -107,19 +107,47 @@ public class Main {
                     case 1:
                         addNewOrder();
                         break;
+                    case 2:  //exit the program
+                        break;
                 }
         }
     }
 
-    public static void addNewOrder(){
+    public static void addNewOrder(){  //Chosen add Order
         Scanner input = new Scanner(System.in);
-
-        System.out.println("Моля изберете плодукта, който искате да поръчате:");
-            System.out.println("---------------------------\n"+
-                "   1. Кока Кола \n" +
-                "   2. Фанта \n" +
-                "   3. Фанта \n" +
-                "----------------------------" );
+        while (true) {
+            System.out.println("Моля изберете продукта, който искате да поръчате:");
+            System.out.println("---------------------------\n" +
+                    "   1. Кока Кола \n" +
+                    "   2. Фанта \n" +
+                    "   3. Закуски \n" +
+                    "   4. Водка \n" +
+                    "   5. Бира \n" +
+                    "   6. Зайо Байо \n" +
+                    "----------------------------");
+            byte userChoise = input.nextByte();
+            switch (userChoise){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                default:
+                    do {
+                        System.out.println("Грешен избор, моля изберете пак:");
+                        userChoise = input.nextByte();
+                    } while (userChoise > 4 || userChoise < 1);
+            }
+        }
     }
 
     public static void exitProgram(){           // Last choise - the method to exit the program ;)
