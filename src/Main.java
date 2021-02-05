@@ -41,13 +41,15 @@ public class Main {
 
         String availableProducts [] = {"Кока Кола","Закуски","Водка"};
 
-        Double dateProductArrived [] = {5.02, 13.02, 1.02};
+        int availableNumber [] = {50, 20, 15};
+
+        double dateProductArrived [] = {5.02, 13.02, 1.02};
 
         String expireDates [] = {"20 days", "3 days", "50 days"};
 
 
        for (int i = 0; i < availableProducts.length; i++){
-            System.out.print(availableProducts[i] + " - " + dateProductArrived[i] + " - " + expireDates[i] + "\n");
+            System.out.print(availableProducts[i] + " - " + availableNumber[i] + "бр" + " - " + dateProductArrived[i] + " - " + expireDates[i] + "\n");
         }
 
 
