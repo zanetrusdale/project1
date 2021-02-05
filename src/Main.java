@@ -21,8 +21,10 @@ public class Main {
                     break;
                 case 2:
                     showAvailableProducts();
+                    break;
                 case 3:
                     showThePlacementOfTheProducts(); // Place of the products:
+                    break;
                 case 4:
                     exitProgram();
                     break;
@@ -64,7 +66,7 @@ public class Main {
 
         System.out.println(productsWeProvide);
 
-
+                    //До тук добре
     }
     public static void showThePlacementOfTheProducts (){
         Scanner input = new Scanner(System.in);
@@ -72,7 +74,7 @@ public class Main {
         ArrayList <String> shelfUpTen = new ArrayList<String>();
         ArrayList <String> shelfFromTenToTwenty = new ArrayList<String>();
 
-        System.out.println("Моля изберете продукт:");                       //TODO: Finish the shelfs
+        System.out.println("Моля изберете продукт:");
             String newOrder = input.nextLine();
         System.out.println("Моля изберете брой:");
             int productNumberOfTheOrder = input.nextInt();
@@ -88,9 +90,38 @@ public class Main {
         } else {
             System.out.println("Wrong information with the order");
         };
-    public static void makeMenuForProductOrder
-
     }
+
+    public static void makeMenuForProductOrders(){                          //making a menu for orders and use everything with "MO" in it!!
+        Scanner input = new Scanner(System.in);
+
+        while (true){
+            System.out.println("Избери опция");
+                System.out.println("---------------------------\n"+
+                    "   1. Заяви поръчка \n" +
+                    "   2. Изход \n" +
+                    "----------------------------" );
+
+                byte userChoise = input.nextByte();
+                switch (userChoise){
+                    case 1:
+                        addNewOrder();
+                        break;
+                }
+        }
+    }
+
+    public static void addNewOrder(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Моля изберете плодукта, който искате да поръчате:");
+            System.out.println("---------------------------\n"+
+                "   1. Кока Кола \n" +
+                "   2. Фанта \n" +
+                "   3. Фанта \n" +
+                "----------------------------" );
+    }
+
     public static void exitProgram(){           // Last choise - the method to exit the program ;)
         System.exit(0);
     }
