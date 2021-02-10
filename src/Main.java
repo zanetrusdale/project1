@@ -1,6 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +5,14 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
    static ArrayList <String> orderedProducts = new ArrayList<String>();
-   static ArrayList<Integer> orderedProductsNumber = new ArrayList<Integer>();
+   static ArrayList <String> orderedProductsShelf1 = new ArrayList<String>();
+   static ArrayList <String> orderedProductsShelf2 = new ArrayList<String>();
+   static ArrayList <String> orderedProductsShelf3 = new ArrayList<String>();
+
+   static ArrayList<Integer> numberOfTheProductOrder = new ArrayList<Integer>();
+   static ArrayList<Integer> numberOfTheProductOrderShelf1 = new ArrayList<Integer>();
+   static ArrayList<Integer> numberOfTheProductOrderShelf2 = new ArrayList<Integer>();
+   static ArrayList<Integer> numberOfTheProductOrderShelf3 = new ArrayList<Integer>();
 
     public static void main(String[] args) {
         ArrayList<String> productsOrdered = new ArrayList<String>();
@@ -88,10 +92,47 @@ public class Main {
         if (orderedProducts.size() >= 1) {
             distributeTheProducts();
         } else {
-            System.out.println("Няма налично количество.");
+            System.out.println("Няма налично количество.\n");
         } developStorage();
     } public static void distributeTheProducts (){
+        System.out.println("Максимално количество - 30броя на ред.");
 
+        developShelf1();
+        developShelf2();
+        developShelf3();
+    }
+    public static void developShelf1() {
+        System.out.println("Рафт 1 - до 10 броя стока");
+        System.out.println("----------------------------------------");
+        if (orderedProductsShelf1.size() >= 1) {
+            for (int i = 0; i < orderedProductsShelf1.size(); i++) {
+                System.out.println(orderedProductsShelf1.get(i) + "- " + numberOfTheProductOrderShelf1.get(i) + "бр");
+            }
+        } else {
+            System.out.println("Празен.");
+        } System.out.println("----------------------------------------\n");
+    }
+        public static void developShelf2 (){
+            System.out.println("Рафт 2 - между 11 и 20 броя стока");
+            System.out.println("----------------------------------------");
+            if (orderedProductsShelf2.size() >= 1) {
+                for (int i = 0; i < orderedProductsShelf2.size(); i++) {
+                    System.out.println(orderedProductsShelf2.get(i) + "- " + numberOfTheProductOrderShelf2.get(i) + "бр");
+                }
+            } else {
+                System.out.println("Празен.");
+            } System.out.println("----------------------------------------\n");
+        }
+        public static void developShelf3(){
+            System.out.println("Рафт 3 - между 21 и 30 броя стока.");
+            System.out.println("----------------------------------------");
+        if (orderedProductsShelf3.size() >= 1 ){
+            for (int i = 0; i < orderedProductsShelf3.size(); i++) {
+                System.out.println(orderedProductsShelf3.get(i) + "- " + numberOfTheProductOrderShelf3.get(i) + "бр");
+            }
+        } else {
+            System.out.println("Празен.");
+        } System.out.println("----------------------------------------\n");
     }
 
     public static void showProductsThatCanBeOrdered(){
@@ -101,26 +142,40 @@ public class Main {
        String products [] = {"Кола ", "Водка ", "Бира ", "Закуски ", "Чипсове "};
        for (int i = 0; i < products.length; i++){
            System.out.println(orderNumber[i] + products[i]);
-       } System.out.println("----------------------------------------");
+       } System.out.println("----------------------------------------\n");
 
          System.out.println("Моля изберете продукт.");                                    // Start ordering the product.
        int productChoise = input.nextInt();
+
        if (productChoise > 5 && productChoise < 1){
            System.out.println("Грешен избор, моля опитайте отново.");
           productChoise = input.nextInt();
-       }  orderProducts(productChoise, products);
-    } public static void orderProducts (int productChoise, String products []){
-       orderedProducts.add(products [productChoise - 1]);    //Добавяне на продуктите в масив
+       }  developTheOrder(productChoise, products);
+    } public static void developTheOrder (int productChoise, String products []) {
+        orderedProducts.add(products[productChoise - 1]);    //Добавяне на продуктите в общ ьрей лист
 
-        System.out.println("Моля изберете брой");
+        System.out.println("Моля изберете брой - до 30бр");
         int numberChoise = input.nextInt();
-        orderedProductsNumber.add(numberChoise);
+        if (numberChoise > 30 && numberChoise < 1) {
+            System.out.println("Неправилно количество");
+        } else if(numberChoise > 1 && numberChoise <= 10){
+            orderedProductsShelf1.add(products[productChoise - 1]);                 // Добавяне на продуктите в 1ви рафт
+            numberOfTheProductOrderShelf1.add(numberChoise);
+        } else if(numberChoise > 10 && numberChoise <= 20){
+            orderedProductsShelf2.add(products[productChoise - 1]);                 // Добавяне на продуктите в 2ри рафт
+            numberOfTheProductOrderShelf2.add(numberChoise);
+        } else if(numberChoise > 20 && numberChoise <= 30){
+            orderedProductsShelf3.add(products[productChoise - 1]);                 // Добавяне на продуктите в 3ти рафт
+            numberOfTheProductOrderShelf3.add(numberChoise);
+        }
+        addOrFinishTheOrder(numberChoise);
+    } public static void addOrFinishTheOrder(int numberChoise){
+        numberOfTheProductOrder.add(numberChoise);
 
-           System.out.println("1. Добави продукт");
-           System.out.println("2. Завърше поръчката");
-
-            int addOrFinishTheOrder = input.nextInt();
-            switch (addOrFinishTheOrder){
+        System.out.println("1. Добави продукт");
+        System.out.println("2. Завърше поръчката");
+            int choiseToAddOrFinishTheOrder = input.nextInt();
+            switch (choiseToAddOrFinishTheOrder){
                 case 1:
                     showProductsThatCanBeOrdered();
                     break;
@@ -129,11 +184,12 @@ public class Main {
                     break;
             } do {
                System.out.println("Грешен избор, моля изберете пак:");
-               addOrFinishTheOrder = input.nextByte();
-           } while (addOrFinishTheOrder > 2 || addOrFinishTheOrder < 1);
+               choiseToAddOrFinishTheOrder = input.nextByte();
+           } while (choiseToAddOrFinishTheOrder > 2 || choiseToAddOrFinishTheOrder < 1);
     } public static void finishTheOrder(){
+        System.out.println("Цялостна поръчка.");
         for (int i = 0; i < orderedProducts.size(); i++){
-            System.out.println(orderedProducts.get(i) + orderedProductsNumber.get(i));
+            System.out.println(orderedProducts.get(i) + "- " + numberOfTheProductOrder.get(i) + "бр");
         } developStorage();
     }
 
