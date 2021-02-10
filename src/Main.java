@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,7 +11,6 @@ public class Main {
    static ArrayList<Integer> orderedProductsNumber = new ArrayList<Integer>();
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         ArrayList<String> productsOrdered = new ArrayList<String>();
         ArrayList<Integer> numberOfProductsOrdered = new ArrayList<Integer>();
 
@@ -54,8 +55,7 @@ public class Main {
     }
 
 
-    public static void developStorage(){           //2nd choise
-        Scanner input = new Scanner(System.in);
+    public static void developStorage(){
 
        while (true) {
            System.out.println("Избери опция");
@@ -83,32 +83,34 @@ public class Main {
            }
        }
     }
-
     public static void showAvailableProducts(){
 
-        System.out.println(orderedProducts);
+        if (orderedProducts.size() >= 1) {
+            distributeTheProducts();
+        } else {
+            System.out.println("Няма налично количество.");
+        } developStorage();
+    } public static void distributeTheProducts (){
+
     }
 
     public static void showProductsThatCanBeOrdered(){
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Продукти които могат да бъдат избрани.");
         System.out.println("----------------------------------------");
-       String products [] = {"1.Кола ", "2.Водка ", "3.Бира ", "4.Закуски ", "5.Чипсове "};
+        String orderNumber [] = {"1." , "2.",  "3.", "4.", "5.",};
+       String products [] = {"Кола ", "Водка ", "Бира ", "Закуски ", "Чипсове "};
        for (int i = 0; i < products.length; i++){
-           System.out.println(products[i]);
+           System.out.println(orderNumber[i] + products[i]);
        } System.out.println("----------------------------------------");
 
+         System.out.println("Моля изберете продукт.");                                    // Start ordering the product.
        int productChoise = input.nextInt();
        if (productChoise > 5 && productChoise < 1){
            System.out.println("Грешен избор, моля опитайте отново.");
-           showProductsThatCanBeOrdered();
+          productChoise = input.nextInt();
        }  orderProducts(productChoise, products);
-    }
-       public static void orderProducts (int productChoise, String products []){
-       Scanner input = new Scanner (System.in);
-
-       orderedProducts.add(products [productChoise - 1]);
+    } public static void orderProducts (int productChoise, String products []){
+       orderedProducts.add(products [productChoise - 1]);    //Добавяне на продуктите в масив
 
         System.out.println("Моля изберете брой");
         int numberChoise = input.nextInt();
@@ -116,9 +118,23 @@ public class Main {
 
            System.out.println("1. Добави продукт");
            System.out.println("2. Завърше поръчката");
-    }
-    public static void finishTheOrder(){
-        int i = input.nextInt();
+
+            int addOrFinishTheOrder = input.nextInt();
+            switch (addOrFinishTheOrder){
+                case 1:
+                    showProductsThatCanBeOrdered();
+                    break;
+                case 2:
+                    finishTheOrder();
+                    break;
+            } do {
+               System.out.println("Грешен избор, моля изберете пак:");
+               addOrFinishTheOrder = input.nextByte();
+           } while (addOrFinishTheOrder > 2 || addOrFinishTheOrder < 1);
+    } public static void finishTheOrder(){
+        for (int i = 0; i < orderedProducts.size(); i++){
+            System.out.println(orderedProducts.get(i) + orderedProductsNumber.get(i));
+        } developStorage();
     }
 
     public static void exitProgram(){           // Last choise - the method to exit the program ;)
