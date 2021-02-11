@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+//Todo make search by date:
 public class Main {
     static Scanner input = new Scanner(System.in);
 
@@ -173,7 +173,7 @@ public class Main {
         numberOfTheProductOrder.add(numberChoise);
 
         System.out.println("1. Добави продукт");
-        System.out.println("2. Завърше поръчката");
+        System.out.println("2. Завърши поръчката");
             int choiseToAddOrFinishTheOrder = input.nextInt();
             switch (choiseToAddOrFinishTheOrder){
                 case 1:
