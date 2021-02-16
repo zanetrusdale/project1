@@ -1,8 +1,6 @@
-import javax.swing.*;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Scanner;
 import java.util.ArrayList;
-// Search by date works only for 1 product in the date
 public class Main {
     static Scanner input = new Scanner(System.in);
 
@@ -28,6 +26,10 @@ public class Main {
                     "   2. Склад \n" +
                     "   3. Изход \n" +
                     "----------------------------");
+        doTheOptionsForTheFirstMenu();
+        }
+    }
+    public static void doTheOptionsForTheFirstMenu(){
             byte userChoise = input.nextByte();
             switch (userChoise) {
                 case 1:
@@ -44,19 +46,17 @@ public class Main {
                         System.out.println("Грешен избор, моля изберете пак:");
                         userChoise = input.nextByte();
                     } while (userChoise > 3 || userChoise < 1);
-            }
         }
     }
-
 
     public static void addTheProductsWeProvide() {             //Method for the User's 1st choise
 
         ArrayList<String> productsWeProvide = new ArrayList<String>();
-        productsWeProvide.add("\n, Кока Кола - Захар като за диабет - 500ml\n");
-        productsWeProvide.add("Пиринско - Младо Пиво - Млада Бира за Млади Хора - 2l\n");
+        productsWeProvide.add("\n, Кока Кола - Захар като за диабет - 500ml - 10дни\n");
+        productsWeProvide.add("Пиринско - Младо Пиво - Млада Бира за Млади Хора - 2l - 15дни\n");
         productsWeProvide.add("Водка - Савой - Ако немаш пари - 700ml\n");
-        productsWeProvide.add("Закуски - (Пици, Банички, Саламки) - Дигант - Малко не струват, но пък са евтини - 350g\n");
-        productsWeProvide.add("Чипсове, Хрупанки - Зайо Байо - Пълни са с.... - 300g\n");
+        productsWeProvide.add("Закуски - (Пици, Банички, Саламки) - Дигант - Малко не струват, но пък са евтини - 350g - 3дни\n");
+        productsWeProvide.add("Чипсове, Хрупанки - Зайо Байо - Пълни са с.... - 300g - 8дни\n");
 
         System.out.println(productsWeProvide);
     }
@@ -214,8 +214,7 @@ public class Main {
             case 2:
                 finishTheOrder();
                 break;
-        }
-        do {
+        } do {
             System.out.println("Грешен избор, моля изберете пак:");
             choiseToAddOrFinishTheOrder = input.nextByte();
         } while (choiseToAddOrFinishTheOrder > 2 || choiseToAddOrFinishTheOrder < 1);
@@ -248,6 +247,13 @@ public class Main {
             chooseDate = input.nextInt();
         }
         chooseDateForTheOrder.add(chooseDate);
+        equalDateToProductAvailable(chooseMonth, chooseDate);
+    }
+    public static void equalDateToProductAvailable (int chooseMonth, int chooseDate){
+        if (orderedProducts.size() > chooseMonthForTheOrder.size()){
+            chooseMonthForTheOrder.add(chooseMonth);
+            chooseDateForTheOrder.add(chooseDate);
+        }
     }
 
     public static void finishTheOrder() {
@@ -262,6 +268,7 @@ public class Main {
     public static void searchByDate() {
         showIfThereAreProducts();
     }
+
     public static void showIfThereAreProducts(){
 
         if (orderedProducts.size() >= 1) {
@@ -271,6 +278,7 @@ public class Main {
             developStorage();
         }
     }
+
     public static void chooseDateRange() {
         System.out.println("Моля въведете начална дата:");
         System.out.println("          Месец:           ");
@@ -286,11 +294,12 @@ public class Main {
 
         compareTheDates(startMonth, startDate, endMonth,endDate);
     }
-public static void compareTheDates(int startMonth, int startDate, int endMonth, int endDate){
-    for (int i = 0; i < orderedProducts.size(); i ++ ){
+    public static void compareTheDates(int startMonth, int startDate, int endMonth, int endDate){
+     for (int i = 0; i < orderedProducts.size(); i ++ ){
        if (startMonth == chooseMonthForTheOrder.get(i) &&  startDate > chooseDateForTheOrder.get(i) || endMonth == chooseMonthForTheOrder.get(i) && endDate < chooseDateForTheOrder.get(i) ){
+           System.out.println("No");
        } else if (startMonth <= chooseMonthForTheOrder.get(i) && endMonth >= chooseMonthForTheOrder.get(i)){
-           System.out.println(orderedProducts.get(i) + "- " +numberOfTheProductOrder.get(i) + "бр " + "- " + chooseDateForTheOrder.get(i) + "." +chooseMonthForTheOrder.get(i));
+           System.out.println(orderedProducts.get(i) + "- " +numberOfTheProductOrder.get(i) + "бр " + "- " + chooseDateForTheOrder.get(i) + "." + chooseMonthForTheOrder.get(i));
         } else {
            System.out.println("Няма количество");
        }
