@@ -250,6 +250,7 @@ public class Main {
         equalDateToProductAvailable(chooseMonth, chooseDate);
     }
     public static void equalDateToProductAvailable (int chooseMonth, int chooseDate){
+       for (int i = 0; i < orderedProducts.size(); i++)
         if (orderedProducts.size() > chooseMonthForTheOrder.size()){
             chooseMonthForTheOrder.add(chooseMonth);
             chooseDateForTheOrder.add(chooseDate);
